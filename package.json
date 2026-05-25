@@ -5,7 +5,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hexanode0x0/tree-sitter-papyrus-sse.git"
+    "url": "git+https://github.com/Silent-City-Projects/tree-sitter-papyrus-sse.git"
   },
   "funding": "",
   "license": "GPLv3",

@@ -18,11 +18,11 @@
     "authors": [
       {
         "name": "Hexanode",
-        "url": ""
+        "url": "https://github.com/Hexanode0x0"
       }
     ],
     "links": {
-      "repository": "https://github.com/Hexanode0x0/tree-sitter-papyrus-sse",
+      "repository": "https://github.com/Silent-City-Projects/tree-sitter-papyrus-sse",
       "funding": ""
     }
   },

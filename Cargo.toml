@@ -7,7 +7,7 @@ license = "GPLv3"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "papyrus"]
 categories = ["parser-implementations", "parsing", "text-editors"]
-repository = "https://github.com/Hexanode0x0/tree-sitter-papyrus-sse"
+repository = "https://github.com/Silent-City-Projects/tree-sitter-papyrus-sse"
 edition = "2021"
 autoexamples = false
 
