@@ -5,6 +5,7 @@ scriptname funcCall
 
 int x = Call()
 float y = Call(20)
+Call("test")
 
 ---
 (source_file
@@ -13,12 +14,19 @@ float y = Call(20)
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (callExpression
             (identifier)))
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (callExpression
             (identifier)
             (parameter
-                (int)))))
+                (int))))
+    (functionCall
+        (callExpression
+            (identifier)
+            (parameter
+                (string)))))

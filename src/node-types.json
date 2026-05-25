@@ -71,6 +71,21 @@
     }
   },
   {
+    "type": "functionCall",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "callExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "header",
     "named": true,
     "fields": {},
@@ -154,6 +169,10 @@
           "named": true
         },
         {
+          "type": "pureAssignment",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         }
@@ -169,6 +188,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "functionCall",
+          "named": true
+        },
         {
           "type": "header",
           "named": true
@@ -236,6 +259,10 @@
           "named": true
         },
         {
+          "type": "pureAssignment",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -264,10 +291,6 @@
   },
   {
     "type": ".",
-    "named": false
-  },
-  {
-    "type": "=",
     "named": false
   },
   {
@@ -300,6 +323,10 @@
   },
   {
     "type": "none",
+    "named": true
+  },
+  {
+    "type": "pureAssignment",
     "named": true
   },
   {

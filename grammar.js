@@ -25,21 +25,26 @@ export default grammar({
         optional(seq($.docString, $._terminator)),
       ),
 
-    _statement: ($) =>
-      seq(choice($.import, $.variableDefinition), $._terminator),
-
     _terminator: () => "\n",
-
     docString: () => token(new RustRegex("(?s)[\{].*?\}")),
-
-    import: ($) => seq(new RustRegex("(?i)import"), $.identifier),
-
-    variableDefinition: ($) =>
-      seq($.type, $.identifier, optional(seq("=", $._expression))),
-
     _term: ($) =>
       choice($.bool, $.int, $.float, $.none, $.string, $.identifier),
+    parameter: ($) =>
+      seq(optional(seq($.identifier, $.pureAssignment)), $._expression),
 
+    //Statements-------------------------------------------------------
+    _statement: ($) =>
+      seq(
+        choice($.import, $.variableDefinition, $.functionCall),
+        $._terminator,
+      ),
+    import: ($) => seq(new RustRegex("(?i)import"), $.identifier),
+    variableDefinition: ($) =>
+      seq($.type, $.identifier, optional(seq($.pureAssignment, $._expression))),
+    functionCall: ($) => $.callExpression,
+    //-----------------------------------------------------------------
+
+    //Expressions
     _expression: ($) => choice($._term, $.callExpression, $.dotExpression),
 
     dotExpression: ($) =>
@@ -53,11 +58,13 @@ export default grammar({
         ")",
       ),
 
-    parameter: ($) => seq(optional(seq($.identifier, "=")), $._expression),
+    //-----------------------------------------------------------------
 
-    length: () => new RustRegex("(?i)length"),
+    //Operators--------------------------------------------------------
+    pureAssignment: () => "=",
+    //-----------------------------------------------------------------
 
-    //Types
+    //Types------------------------------------------------------------
     type: ($) => choice($._primitiveType, $._arrayType),
     _arrayType: ($) => seq($._primitiveType, "[]"),
     _primitiveType: ($) =>
@@ -74,15 +81,16 @@ export default grammar({
     float: () => new RustRegex("-?[0-9]+\.[0-9]+"),
     string: () => new RustRegex('\"(.?+)\"'),
     none: () => new RustRegex("(?i)none"),
+    length: () => new RustRegex("(?i)length"),
     identifier: () => new RustRegex("(?i)[a-z_][a-z0-9_]*"),
     //-----------------------------------------------------------------
 
-    //Flag groups
+    //Flag groups------------------------------------------------------
     _scriptFlags: ($) => choice($.conditional, $.hidden),
     _variableFlags: ($) => $.conditional,
     //-----------------------------------------------------------------
 
-    //Flags
+    //Flags------------------------------------------------------------
     conditional: () => new RustRegex("(?i)conditional"),
     hidden: () => new RustRegex("(?i)hidden"),
     //-----------------------------------------------------------------

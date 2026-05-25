@@ -18,6 +18,7 @@ int x = y.test(param0 = 5)
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
@@ -25,6 +26,7 @@ int x = y.test(param0 = 5)
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
@@ -35,20 +37,24 @@ int x = y.test(param0 = 5)
                     (string))
                 (parameter
                     (identifier)
+                    (pureAssignment)
                     (identifier)))))
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (dotExpression
             (identifier)
             (length)))
     (variableDefinition
         (type)
         (identifier)
+        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
                 (identifier)
                 (parameter
                     (identifier)
+                    (pureAssignment)
                     (int))))))

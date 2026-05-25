@@ -93,6 +93,76 @@
         }
       ]
     },
+    "_terminator": {
+      "type": "STRING",
+      "value": "\n"
+    },
+    "docString": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(?s)[{].*?}"
+      }
+    },
+    "_term": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "bool"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "int"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "float"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "none"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
+    },
+    "parameter": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "pureAssignment"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_expression"
+        }
+      ]
+    },
     "_statement": {
       "type": "SEQ",
       "members": [
@@ -106,6 +176,10 @@
             {
               "type": "SYMBOL",
               "name": "variableDefinition"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "functionCall"
             }
           ]
         },
@@ -114,17 +188,6 @@
           "name": "_terminator"
         }
       ]
-    },
-    "_terminator": {
-      "type": "STRING",
-      "value": "\n"
-    },
-    "docString": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "(?s)[{].*?}"
-      }
     },
     "import": {
       "type": "SEQ",
@@ -157,8 +220,8 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "STRING",
-                  "value": "="
+                  "type": "SYMBOL",
+                  "name": "pureAssignment"
                 },
                 {
                   "type": "SYMBOL",
@@ -173,34 +236,9 @@
         }
       ]
     },
-    "_term": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "bool"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "int"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "float"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "none"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+    "functionCall": {
+      "type": "SYMBOL",
+      "name": "callExpression"
     },
     "_expression": {
       "type": "CHOICE",
@@ -303,39 +341,9 @@
         }
       ]
     },
-    "parameter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                {
-                  "type": "STRING",
-                  "value": "="
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        }
-      ]
-    },
-    "length": {
-      "type": "PATTERN",
-      "value": "(?i)length"
+    "pureAssignment": {
+      "type": "STRING",
+      "value": "="
     },
     "type": {
       "type": "CHOICE",
@@ -425,6 +433,10 @@
     "none": {
       "type": "PATTERN",
       "value": "(?i)none"
+    },
+    "length": {
+      "type": "PATTERN",
+      "value": "(?i)length"
     },
     "identifier": {
       "type": "PATTERN",
