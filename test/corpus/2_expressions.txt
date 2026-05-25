@@ -1,0 +1,54 @@
+==============
+Dot Expression
+==============
+scriptname dot
+
+int x = y.test()
+
+int x = y.test(None, "param1", param2 = x)
+
+int n = x.length
+
+int x = y.test(param0 = 5)
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (dotExpression
+            (identifier)
+            (callExpression
+                (identifier))))
+    (variableDefinition
+        (type)
+        (identifier)
+        (dotExpression
+            (identifier)
+            (callExpression
+                (identifier)
+                (parameter
+                    (none))
+                (parameter
+                    (string))
+                (parameter
+                    (identifier)
+                    (identifier)))))
+    (variableDefinition
+        (type)
+        (identifier)
+        (dotExpression
+            (identifier)
+            (length)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (dotExpression
+            (identifier)
+            (callExpression
+                (identifier)
+                (parameter
+                    (identifier)
+                    (int))))))

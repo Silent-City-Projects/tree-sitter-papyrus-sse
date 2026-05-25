@@ -1,0 +1,68 @@
+===================
+Script Header Plain
+===================
+ScriptName headerTest
+
+---
+(source_file
+    (header
+        (identifier)))
+
+
+=======================
+Script Header Extension
+=======================
+ScriptName MyScript Extends MyOtherScript
+
+---
+(source_file
+    (header
+        (identifier)
+        (identifier)))
+
+
+========================
+Script Header Doc String
+========================
+ScriptName MyScript
+{a test
+aaa a tes
+test
+}
+
+---
+(source_file
+    (header
+        (identifier)
+        (docString)))
+
+
+===================
+Script Header Flags
+===================
+ScriptName MyScript Conditional Hidden
+
+---
+(source_file
+    (header
+        (identifier)
+        (conditional)
+        (hidden)))
+
+
+===================
+Script Header Combo
+===================
+ScriptName MyScript Extends Actor Conditional Hidden
+{this
+is a
+docstring}
+
+---
+(source_file
+    (header
+        (identifier)
+        (identifier)
+        (conditional)
+        (hidden)
+        (docString)))

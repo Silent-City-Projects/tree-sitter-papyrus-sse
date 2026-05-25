@@ -1,0 +1,117 @@
+===================
+Variable Definition
+===================
+ScriptName DefTest
+
+bool x
+int y
+MyScript[] foo
+whatever bar
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier))
+    (variableDefinition
+        (type
+            (identifier))
+        (identifier))
+    (variableDefinition
+        (type
+            (identifier))
+        (identifier)))
+
+
+
+==================================
+Variable Definition And Assignment
+==================================
+scriptname deftest
+
+bool x = true
+float y = 1.1
+int n = 200
+SomeScriptType foo
+string MyString = "a string literal"
+int bar = 0xa000800
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (bool))
+    (variableDefinition
+        (type)
+        (identifier)
+        (float))
+    (variableDefinition
+        (type)
+        (identifier)
+        (int))
+    (variableDefinition
+        (type
+            (identifier))
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (string))
+    (variableDefinition
+        (type)
+        (identifier)
+        (int)))
+
+
+
+=============
+Script Import
+=============
+ScriptName MyScript
+
+import SomeOtherScript
+
+---
+(source_file
+    (header
+        (identifier))
+    (import
+    (identifier)))
+
+
+
+=================
+Multi-line Import
+=================
+ScriptName MyScript
+
+import \
+SomeOtherScript
+
+---
+(source_file
+    (header
+        (identifier))
+    (import
+        (identifier)))
+
+
+
+==============
+Invalid Import
+:error
+==============
+ScriptName MyScript
+
+import SomeOtherScript\
+Trailing
+
+---

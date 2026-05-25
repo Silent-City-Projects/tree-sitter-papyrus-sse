@@ -1,0 +1,39 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "papyrus_sse",
+      "camelcase": "PapyrusSSE",
+      "title": "Papyrus SSE",
+      "scope": "source.psc",
+      "file-types": ["psc"],
+      "injection-regex": "^papyrus$",
+      "class-name": "TreeSitterPapyrusSSE"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "GPLv3",
+    "description": "A parser for the Papyrus scripting language used in Skyrim Special Edition.",
+    "authors": [
+      {
+        "name": "Hexanode",
+        "url": ""
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/Hexanode0x0/tree-sitter-papyrus-sse",
+      "funding": ""
+    }
+  },
+  "bindings": {
+    "c": false,
+    "go": false,
+    "java": false,
+    "node": false,
+    "python": false,
+    "rust": true,
+    "swift": false,
+    "zig": false
+  }
+}
