@@ -18,7 +18,6 @@ int x = y.test(param0 = 5)
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
@@ -26,7 +25,6 @@ int x = y.test(param0 = 5)
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
@@ -37,24 +35,185 @@ int x = y.test(param0 = 5)
                     (string))
                 (parameter
                     (identifier)
-                    (pureAssignment)
                     (identifier)))))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (dotExpression
             (identifier)
             (length)))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (dotExpression
             (identifier)
             (callExpression
                 (identifier)
                 (parameter
                     (identifier)
-                    (pureAssignment)
                     (int))))))
+================
+Unary Expression
+================
+scriptname unary
+
+int x = !y
+float foo = - bar
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (unaryExpression
+            (identifier)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (unaryExpression
+            (identifier))))
+
+
+
+=================
+Binary Expression
+=================
+scriptname binExpr
+
+int x = 1 - 4 * 1.0 + 5
+
+bool y = "string" != "compare"
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (binaryExpression
+            (int)
+            (binaryExpression
+                (binaryExpression
+                    (int)
+                    (float))
+                (int))))
+    (variableDefinition
+        (type)
+        (identifier)
+        (binaryExpression
+            (string)
+            (string))))
+
+
+
+===========
+Parenthesis
+===========
+scriptname paren
+
+int x = (y)
+int foo = (-bar + 2) + 2
+int MyVar = -(Call() + 2)
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (parenthesis
+            (identifier)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (binaryExpression
+            (parenthesis
+                (binaryExpression
+                    (unaryExpression
+                        (identifier))
+                    (int)))
+                (int)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (unaryExpression
+            (parenthesis
+                (binaryExpression
+                    (callExpression
+                        (identifier))
+                (int))))))
+
+
+
+======================
+Mismatched Parenthesis
+:error
+======================
+scriptname errors
+
+int x = (( 10 + 10 )
+
+---
+
+
+
+===============
+Cast Expression
+===============
+scriptname cast
+
+bool x = 1 as bool
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (castExpression
+            (int)
+            (type))))
+
+
+
+
+=================
+Array Expressions
+=================
+scriptname array
+
+int[] x = new int[20]
+
+int[] x = new int[][20]
+
+int x = arr[5 + 5]
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (arrayCreationExpression
+            (type)
+            (int)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (arrayCreationExpression
+            (type)
+            (int)))
+    (variableDefinition
+        (type)
+        (identifier)
+        (arrayExpression
+            (identifier)
+            (binaryExpression
+            (int)
+            (int)))))

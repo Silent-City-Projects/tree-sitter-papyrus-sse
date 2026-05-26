@@ -14,13 +14,11 @@ Call("test")
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (callExpression
             (identifier)))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (callExpression
             (identifier)
             (parameter

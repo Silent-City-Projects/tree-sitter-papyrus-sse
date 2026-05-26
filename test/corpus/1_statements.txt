@@ -48,17 +48,14 @@ int bar = 0xa000800
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (bool))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (float))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (int))
     (variableDefinition
         (type
@@ -67,13 +64,30 @@ int bar = 0xa000800
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (string))
     (variableDefinition
         (type)
         (identifier)
-        (pureAssignment)
         (int)))
+
+
+
+==============
+Variable Flags
+==============
+scriptname varflag
+
+int x = "str" conditional
+
+---
+(source_file
+    (header
+        (identifier))
+    (variableDefinition
+        (type)
+        (identifier)
+        (string)
+        (conditional)))
 
 
 
