@@ -86,6 +86,77 @@
     }
   },
   {
+    "type": "assignment",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "binaryExpression",
     "named": true,
     "fields": {},
@@ -296,10 +367,6 @@
           "named": true
         },
         {
-          "type": "length",
-          "named": true
-        },
-        {
           "type": "none",
           "named": true
         },
@@ -313,6 +380,65 @@
         },
         {
           "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "docString",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "global",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "parameterDefinition",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "variableDefinition",
           "named": true
         }
       ]
@@ -381,6 +507,104 @@
     "fields": {}
   },
   {
+    "type": "lValue",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nativeFunction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "docString",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "native",
+          "named": true
+        },
+        {
+          "type": "parameterDefinition",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {},
@@ -438,6 +662,77 @@
         },
         {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameterDefinition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "type",
           "named": true
         },
         {
@@ -515,6 +810,73 @@
     }
   },
   {
+    "type": "return",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "root": true,
@@ -523,6 +885,14 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
         {
           "type": "functionCall",
           "named": true
@@ -533,6 +903,14 @@
         },
         {
           "type": "import",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -716,6 +1094,10 @@
     "named": false
   },
   {
+    "type": "%=",
+    "named": false
+  },
+  {
     "type": "&&",
     "named": false
   },
@@ -732,7 +1114,15 @@
     "named": false
   },
   {
+    "type": "*=",
+    "named": false
+  },
+  {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": "+=",
     "named": false
   },
   {
@@ -744,11 +1134,19 @@
     "named": false
   },
   {
+    "type": "-=",
+    "named": false
+  },
+  {
     "type": ".",
     "named": false
   },
   {
     "type": "/",
+    "named": false
+  },
+  {
+    "type": "/=",
     "named": false
   },
   {
@@ -804,6 +1202,10 @@
     "named": true
   },
   {
+    "type": "global",
+    "named": true
+  },
+  {
     "type": "hidden",
     "named": true
   },
@@ -812,7 +1214,7 @@
     "named": true
   },
   {
-    "type": "length",
+    "type": "native",
     "named": true
   },
   {

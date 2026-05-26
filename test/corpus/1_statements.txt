@@ -134,3 +134,78 @@ import SomeOtherScript\
 Trailing
 
 ---
+
+
+
+==========
+Assignment
+==========
+scriptname assign
+
+x = 10
+
+y.x = MyFunc(20 + arr[9])
+
+arr[7] = x.y
+
+---
+(source_file
+    (header
+        (identifier))
+    (assignment
+        (lValue
+            (identifier))
+        (int))
+    (assignment
+        (lValue
+          (identifier)
+          (identifier))
+        (callExpression
+          (identifier)
+          (parameter
+            (binaryExpression
+              (int)
+              (arrayExpression
+                (identifier)
+                (int))))))
+    (assignment
+        (lValue
+          (identifier)
+          (int))
+        (dotExpression
+          (identifier)
+          (identifier))))
+
+
+
+================
+Return Statement
+================
+scriptname ret
+
+return x + y
+
+return arr[10]
+
+return 20
+
+return call()
+
+---
+
+(source_file
+    (header
+        (identifier))
+    (return
+        (binaryExpression
+            (identifier)
+            (identifier)))
+    (return
+        (arrayExpression
+            (identifier)
+            (int)))
+    (return
+        (int))
+    (return
+        (callExpression
+        (identifier))))

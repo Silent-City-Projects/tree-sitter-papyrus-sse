@@ -41,7 +41,7 @@ int x = y.test(param0 = 5)
         (identifier)
         (dotExpression
             (identifier)
-            (length)))
+            (identifier)))
     (variableDefinition
         (type)
         (identifier)
@@ -189,6 +189,7 @@ scriptname array
 
 int[] x = new int[20]
 
+; won't compile, but allowed by grammar
 int[] x = new int[][20]
 
 int x = arr[5 + 5]

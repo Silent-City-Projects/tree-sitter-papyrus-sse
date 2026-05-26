@@ -9,7 +9,7 @@
 
 export default grammar({
   name: "papyrusSSE",
-  extras: () => ["\\\n", /\s/, new RustRegex("//.*?\n")],
+  extras: () => ["\\\n", /\s/, new RustRegex(";.*?\n")],
   word: ($) => $.identifier,
   rules: {
     source_file: ($) => seq($.header, repeat($._statement)),
@@ -19,20 +19,25 @@ export default grammar({
         new RustRegex("(?i)scriptname"),
         $.identifier,
         optional(seq(new RustRegex("(?i)extends"), $.identifier)),
-        optional(repeat($._scriptFlags)),
-        $._terminator,
-        optional(seq($.docString, $._terminator)),
+        repeat(choice($.conditional, $.hidden)),
+        "\n",
+        optional(seq($.docString, "\n")),
       ),
-
-    _terminator: () => "\n",
     docString: () => new RustRegex("(?s)[\{].*?\}"),
-    parameter: ($) => seq(optional(seq($.identifier, "=")), $._expression),
 
     //Statements-------------------------------------------------------
     _statement: ($) =>
       seq(
-        choice($.import, $.variableDefinition, $.functionCall),
-        $._terminator,
+        choice(
+          $.import,
+          $.variableDefinition,
+          $.functionCall,
+          $.assignment,
+          $.return,
+          $.function,
+          $.nativeFunction,
+        ),
+        "\n",
       ),
     import: ($) => seq(new RustRegex("(?i)import"), $.identifier),
     variableDefinition: ($) =>
@@ -40,9 +45,63 @@ export default grammar({
         $.type,
         $.identifier,
         optional(seq("=", $._expression)),
-        optional($._variableFlags),
+        optional($.conditional),
       ),
     functionCall: ($) => $.callExpression,
+    assignment: ($) =>
+      choice(
+        seq($.lValue, "=", $._expression),
+        seq($.lValue, "+=", $._expression),
+        seq($.lValue, "-=", $._expression),
+        seq($.lValue, "*=", $._expression),
+        seq($.lValue, "/=", $._expression),
+        seq($.lValue, "%=", $._expression),
+      ),
+    lValue: ($) =>
+      choice(
+        seq(optional(seq($.identifier, token.immediate("."))), $.identifier),
+        seq(
+          $.identifier,
+          token.immediate("["),
+          $._expression,
+          token.immediate("]"),
+        ),
+      ),
+    return: ($) => seq(new RustRegex("(?i)return"), $._expression),
+    function: ($) =>
+      seq(
+        optional($.type),
+        new RustRegex("(?i)function"),
+        $.identifier,
+        "(",
+        optional(
+          seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
+        ),
+        ")",
+        optional($.global),
+        "\n",
+        optional(seq($.docString, "\n")),
+        repeat1($._statement),
+        new RustRegex("(?i)endfunction"),
+      ),
+    nativeFunction: ($) =>
+      prec.left(
+        1,
+        seq(
+          optional($.type),
+          new RustRegex("(?i)function"),
+          $.identifier,
+          "(",
+          optional(
+            seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
+          ),
+          ")",
+          $.native,
+          optional(seq("\n", $.docString)),
+        ),
+      ),
+    parameterDefinition: ($) =>
+      seq($.type, $.identifier, optional(seq("=", $._expression))),
     //-----------------------------------------------------------------
 
     //Expressions------------------------------------------------------
@@ -58,6 +117,7 @@ export default grammar({
         $.unaryExpression,
         $.binaryExpression,
       ),
+    parameter: ($) => seq(optional(seq($.identifier, "=")), $._expression),
     _term: ($) =>
       choice($.bool, $.int, $.float, $.none, $.string, $.identifier),
     callExpression: ($) =>
@@ -66,7 +126,7 @@ export default grammar({
         seq(
           $.identifier,
           "(",
-          optional(seq($.parameter, optional(repeat(seq(",", $.parameter))))),
+          optional(seq($.parameter, repeat(seq(",", $.parameter)))),
           ")",
         ),
       ),
@@ -93,7 +153,7 @@ export default grammar({
         ),
       ),
     dotExpression: ($) =>
-      prec(10, seq($._expression, ".", choice($.callExpression, $.length))),
+      prec(10, seq($._expression, ".", choice($.callExpression, $.identifier))),
     castExpression: ($) => prec(9, seq($._expression, "as", $.type)),
     unaryExpression: ($) => prec(8, seq(choice("!", "-"), $._expression)),
     binaryExpression: ($) =>
@@ -133,14 +193,10 @@ export default grammar({
     float: () => new RustRegex("-?[0-9]+\.[0-9]+"),
     string: () => new RustRegex('\"([^\n\t"]*?)\"'),
     none: () => new RustRegex("(?i)none"),
-    length: () => new RustRegex("(?i)length"),
     identifier: () => new RustRegex("(?i)[a-z_][a-z0-9_]*"),
     //-----------------------------------------------------------------
 
     //Flag groups------------------------------------------------------
-    _scriptFlags: ($) => choice($.conditional, $.hidden),
-    _variableFlags: ($) => $.conditional,
-    _functionFlags: ($) => choice($.native, $.global),
     _propertyFlags: ($) =>
       choice($.auto, $.autoreadonly, $.hidden, $.conditional),
     //-----------------------------------------------------------------
