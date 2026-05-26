@@ -74,7 +74,7 @@ Native Functions
 ================
 scriptname native
 
-int function aa() native
+int function CoolFunction() native
 
 int function aa(test aaaa, bool meow = true) native
 
@@ -98,3 +98,46 @@ int function aa(test aaaa, bool meow = true) native
           (identifier)
           (bool))
         (native)))
+
+
+
+=====================================
+Function Default Parameter Expression
+:error
+=====================================
+scriptname native
+
+int function aa(int test = 1 + 1) native
+
+---
+
+==================
+Function Docstring
+==================
+scriptname docfunc
+
+function test()
+{this is a docstring}
+    return 0
+EndFunction
+
+function test2(test aaaa) native
+{aaaa}
+
+---
+(source_file
+    (header
+        (identifier))
+    (function
+        (identifier)
+        (docString)
+        (return
+          (int)))
+    (nativeFunction
+        (identifier)
+        (parameterDefinition
+          (type
+            (identifier))
+          (identifier))
+        (native)
+        (docString)))

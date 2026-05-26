@@ -386,6 +386,61 @@
     }
   },
   {
+    "type": "event",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "event",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "parameterDefinition",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "variableDefinition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function",
     "named": true,
     "fields": {},
@@ -399,6 +454,10 @@
         },
         {
           "type": "docString",
+          "named": true
+        },
+        {
+          "type": "event",
           "named": true
         },
         {
@@ -419,6 +478,10 @@
         },
         {
           "type": "import",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
           "named": true
         },
         {
@@ -574,6 +637,29 @@
     }
   },
   {
+    "type": "nativeEvent",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "native",
+          "named": true
+        },
+        {
+          "type": "parameterDefinition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nativeFunction",
     "named": true,
     "fields": {},
@@ -680,31 +766,7 @@
       "required": true,
       "types": [
         {
-          "type": "arrayCreationExpression",
-          "named": true
-        },
-        {
-          "type": "arrayExpression",
-          "named": true
-        },
-        {
-          "type": "binaryExpression",
-          "named": true
-        },
-        {
           "type": "bool",
-          "named": true
-        },
-        {
-          "type": "callExpression",
-          "named": true
-        },
-        {
-          "type": "castExpression",
-          "named": true
-        },
-        {
-          "type": "dotExpression",
           "named": true
         },
         {
@@ -724,19 +786,11 @@
           "named": true
         },
         {
-          "type": "parenthesis",
-          "named": true
-        },
-        {
           "type": "string",
           "named": true
         },
         {
           "type": "type",
-          "named": true
-        },
-        {
-          "type": "unaryExpression",
           "named": true
         }
       ]
@@ -890,6 +944,10 @@
           "named": true
         },
         {
+          "type": "event",
+          "named": true
+        },
+        {
           "type": "function",
           "named": true
         },
@@ -903,6 +961,10 @@
         },
         {
           "type": "import",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
           "named": true
         },
         {

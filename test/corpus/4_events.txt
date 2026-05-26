@@ -1,0 +1,46 @@
+===============
+Event Statement
+===============
+scriptname event
+
+Event MyEvent(bool param1, int param2)
+    return param2
+EndEvent
+
+---
+(source_file
+    (header
+        (identifier))
+    (event
+        (identifier)
+        (parameterDefinition
+            (type)
+            (identifier))
+        (parameterDefinition
+            (type)
+            (identifier))
+        (return
+            (identifier))))
+
+
+
+============
+Native Event
+============
+scriptname event
+
+Event MyEvent(bool param1, int param2) native
+
+---
+(source_file
+    (header
+        (identifier))
+    (nativeEvent
+        (identifier)
+        (parameterDefinition
+            (type)
+            (identifier))
+        (parameterDefinition
+            (type)
+            (identifier))
+        (native)))

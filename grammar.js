@@ -11,6 +11,7 @@ export default grammar({
   name: "papyrusSSE",
   extras: () => ["\\\n", /\s/, new RustRegex(";.*?\n")],
   word: ($) => $.identifier,
+  conflicts: ($) => [[$.nativeFunction]],
   rules: {
     source_file: ($) => seq($.header, repeat($._statement)),
 
@@ -23,7 +24,7 @@ export default grammar({
         "\n",
         optional(seq($.docString, "\n")),
       ),
-    docString: () => new RustRegex("(?s)[\{].*?\}"),
+    docString: () => new RustRegex("(?s)[\{][^\}]*?\}"),
 
     //Statements-------------------------------------------------------
     _statement: ($) =>
@@ -36,6 +37,8 @@ export default grammar({
           $.return,
           $.function,
           $.nativeFunction,
+          $.event,
+          $.nativeEvent,
         ),
         "\n",
       ),
@@ -68,6 +71,8 @@ export default grammar({
         ),
       ),
     return: ($) => seq(new RustRegex("(?i)return"), $._expression),
+    parameterDefinition: ($) =>
+      seq($.type, $.identifier, optional(seq("=", $._term))),
     function: ($) =>
       seq(
         optional($.type),
@@ -85,23 +90,42 @@ export default grammar({
         new RustRegex("(?i)endfunction"),
       ),
     nativeFunction: ($) =>
-      prec.left(
-        1,
-        seq(
-          optional($.type),
-          new RustRegex("(?i)function"),
-          $.identifier,
-          "(",
-          optional(
-            seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
-          ),
-          ")",
-          $.native,
-          optional(seq("\n", $.docString)),
+      seq(
+        optional($.type),
+        new RustRegex("(?i)function"),
+        $.identifier,
+        "(",
+        optional(
+          seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
         ),
+        ")",
+        $.native,
+        optional(seq("\n", $.docString)),
       ),
-    parameterDefinition: ($) =>
-      seq($.type, $.identifier, optional(seq("=", $._expression))),
+    event: ($) =>
+      seq(
+        new RustRegex("(?i)event"),
+        $.identifier,
+        "(",
+        optional(
+          seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
+        ),
+        ")",
+        "\n",
+        repeat1($._statement),
+        new RustRegex("(?i)endevent"),
+      ),
+    nativeEvent: ($) =>
+      seq(
+        new RustRegex("(?i)event"),
+        $.identifier,
+        "(",
+        optional(
+          seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
+        ),
+        ")",
+        $.native,
+      ),
     //-----------------------------------------------------------------
 
     //Expressions------------------------------------------------------
