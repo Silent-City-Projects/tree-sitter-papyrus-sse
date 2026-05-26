@@ -30,6 +30,8 @@ export default grammar({
     _statement: ($) =>
       seq(
         choice(
+          $.if,
+          $.while,
           $.import,
           $.variableDefinition,
           $.functionCall,
@@ -39,8 +41,34 @@ export default grammar({
           $.nativeFunction,
           $.event,
           $.nativeEvent,
+          $.state,
         ),
         "\n",
+      ),
+    if: ($) =>
+      seq(
+        new RustRegex("(?i)if"),
+        $._expression,
+        "\n",
+        repeat1($._statement),
+        repeat(
+          seq(
+            new RustRegex("(?i)elseif"),
+            $._expression,
+            "\n",
+            repeat1($._statement),
+          ),
+        ),
+        optional(seq(new RustRegex("(?i)else"), "\n", repeat1($._statement))),
+        new RustRegex("(?i)endif"),
+      ),
+    while: ($) =>
+      seq(
+        new RustRegex("(?i)while"),
+        $._expression,
+        "\n",
+        repeat1($._statement),
+        new RustRegex("(?i)endwhile"),
       ),
     import: ($) => seq(new RustRegex("(?i)import"), $.identifier),
     variableDefinition: ($) =>
@@ -125,6 +153,15 @@ export default grammar({
         ),
         ")",
         $.native,
+      ),
+    state: ($) =>
+      seq(
+        optional(new RustRegex("(?i)auto")),
+        new RustRegex("(?i)state"),
+        $.identifier,
+        "\n",
+        repeat1(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
+        new RustRegex("(?i)endstate"),
       ),
     //-----------------------------------------------------------------
 

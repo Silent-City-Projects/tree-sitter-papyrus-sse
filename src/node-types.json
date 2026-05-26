@@ -414,6 +414,10 @@
           "named": true
         },
         {
+          "type": "if",
+          "named": true
+        },
+        {
           "type": "import",
           "named": true
         },
@@ -434,7 +438,15 @@
           "named": true
         },
         {
+          "type": "state",
+          "named": true
+        },
+        {
           "type": "variableDefinition",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -477,6 +489,10 @@
           "named": true
         },
         {
+          "type": "if",
+          "named": true
+        },
+        {
           "type": "import",
           "named": true
         },
@@ -497,11 +513,19 @@
           "named": true
         },
         {
+          "type": "state",
+          "named": true
+        },
+        {
           "type": "type",
           "named": true
         },
         {
           "type": "variableDefinition",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -544,6 +568,121 @@
         },
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "if",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "event",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if",
+          "named": true
+        },
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "state",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        },
+        {
+          "type": "variableDefinition",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]
@@ -960,6 +1099,10 @@
           "named": true
         },
         {
+          "type": "if",
+          "named": true
+        },
+        {
           "type": "import",
           "named": true
         },
@@ -976,7 +1119,46 @@
           "named": true
         },
         {
+          "type": "state",
+          "named": true
+        },
+        {
           "type": "variableDefinition",
+          "named": true
+        },
+        {
+          "type": "while",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "state",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "event",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
           "named": true
         }
       ]
@@ -1134,6 +1316,121 @@
         },
         {
           "type": "unaryExpression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "while",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arrayCreationExpression",
+          "named": true
+        },
+        {
+          "type": "arrayExpression",
+          "named": true
+        },
+        {
+          "type": "assignment",
+          "named": true
+        },
+        {
+          "type": "binaryExpression",
+          "named": true
+        },
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "callExpression",
+          "named": true
+        },
+        {
+          "type": "castExpression",
+          "named": true
+        },
+        {
+          "type": "dotExpression",
+          "named": true
+        },
+        {
+          "type": "event",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "function",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "if",
+          "named": true
+        },
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "int",
+          "named": true
+        },
+        {
+          "type": "nativeEvent",
+          "named": true
+        },
+        {
+          "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesis",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "state",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "unaryExpression",
+          "named": true
+        },
+        {
+          "type": "variableDefinition",
+          "named": true
+        },
+        {
+          "type": "while",
           "named": true
         }
       ]

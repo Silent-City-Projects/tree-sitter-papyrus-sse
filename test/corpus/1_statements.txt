@@ -209,3 +209,99 @@ return call()
     (return
         (callExpression
         (identifier))))
+
+============
+If Statement
+============
+scriptname ifScript
+
+if x == y
+    y = z
+elseif 5 > 6
+    m = u
+else
+    return 0
+endif
+
+---
+(source_file
+    (header
+        (identifier))
+    (if
+        (binaryExpression
+            (identifier)
+            (identifier))
+        (assignment
+            (lValue
+                (identifier))
+            (identifier))
+        (binaryExpression
+            (int)
+            (int))
+        (assignment
+            (lValue
+                (identifier))
+            (identifier))
+        (return
+            (int))))
+
+
+
+
+===============
+While Statement
+===============
+scriptname whileScript
+
+while true
+    i += 1
+endwhile
+
+---
+(source_file
+    (header
+        (identifier))
+    (while
+        (bool)
+        (assignment
+            (lValue
+                (identifier))
+            (int))))
+
+
+
+===============
+State Statement
+===============
+scriptname state
+
+Auto State myState
+    function name()
+        return 0
+    endFunction
+endstate
+
+---
+(source_file
+    (header
+        (identifier))
+    (state
+        (identifier)
+        (function
+            (identifier)
+            (return
+                (int)))))
+
+
+
+==================
+Non-function State
+:error
+==================
+scriptname state
+
+Auto State myState
+    int x = 4
+endstate
+
+---
