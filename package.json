@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-papyrus-sse",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "A parser for the Papyrus scripting language used in Skyrim Special Edition.",
   "type": "module",
   "repository": {

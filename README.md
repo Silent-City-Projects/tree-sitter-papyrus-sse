@@ -3,4 +3,4 @@ This [tree-sitter](https://github.com/tree-sitter/tree-sitter) parser is used to
 
 Due to significant changes between games, this project only supports the version of Papyrus used in SSE.
 
-# Heavily WIP
+While most scripts should parse correctly (please make an issue if they don't), this project is still early and may revieve changes.

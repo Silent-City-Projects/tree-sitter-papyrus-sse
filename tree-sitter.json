@@ -12,7 +12,7 @@
     }
   ],
   "metadata": {
-    "version": "0.1.0",
+    "version": "0.5.0",
     "license": "GPLv3",
     "description": "A parser for the Papyrus scripting language used in Skyrim Special Edition.",
     "authors": [
