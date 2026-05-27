@@ -9,9 +9,13 @@
 
 export default grammar({
   name: "papyrusSSE",
-  extras: () => ["\\\n", /\s/, new RustRegex(";.*?\n")],
+  extras: ($) => ["\\\n", /\s/, $._comment],
   word: ($) => $.identifier,
-  conflicts: ($) => [[$.nativeFunction]],
+  conflicts: ($) => [
+    [$.nativeFunction],
+    [$.nativeEvent],
+    [$.property, $.propertyFull],
+  ],
   rules: {
     source_file: ($) => seq($.header, repeat($._statement)),
 
@@ -25,6 +29,8 @@ export default grammar({
         optional(seq($.docString, "\n")),
       ),
     docString: () => new RustRegex("(?s)[\{][^\}]*?\}"),
+    _comment: ($) =>
+      token(choice(seq(";", /.*/), seq(";*", /[^*]*\*+([^/*][^*]*\*+)*/, ";"))),
 
     //Statements-------------------------------------------------------
     _statement: ($) =>
@@ -42,24 +48,27 @@ export default grammar({
           $.event,
           $.nativeEvent,
           $.state,
+          $.property,
+          $.propertyFull,
         ),
         "\n",
       ),
+    _paren: ($) => $.parenthesis,
     if: ($) =>
       seq(
         new RustRegex("(?i)if"),
         $._expression,
         "\n",
-        repeat1($._statement),
+        repeat($._statement),
         repeat(
           seq(
             new RustRegex("(?i)elseif"),
             $._expression,
             "\n",
-            repeat1($._statement),
+            repeat($._statement),
           ),
         ),
-        optional(seq(new RustRegex("(?i)else"), "\n", repeat1($._statement))),
+        optional(seq(new RustRegex("(?i)else"), "\n", repeat($._statement))),
         new RustRegex("(?i)endif"),
       ),
     while: ($) =>
@@ -78,7 +87,7 @@ export default grammar({
         optional(seq("=", $._expression)),
         optional($.conditional),
       ),
-    functionCall: ($) => $.callExpression,
+    functionCall: ($) => choice($.callExpression, $.dotExpression),
     assignment: ($) =>
       choice(
         seq($.lValue, "=", $._expression),
@@ -98,7 +107,7 @@ export default grammar({
           token.immediate("]"),
         ),
       ),
-    return: ($) => seq(new RustRegex("(?i)return"), $._expression),
+    return: ($) => seq(new RustRegex("(?i)return"), optional($._expression)),
     parameterDefinition: ($) =>
       seq($.type, $.identifier, optional(seq("=", $._term))),
     function: ($) =>
@@ -114,7 +123,7 @@ export default grammar({
         optional($.global),
         "\n",
         optional(seq($.docString, "\n")),
-        repeat1($._statement),
+        repeat($._statement),
         new RustRegex("(?i)endfunction"),
       ),
     nativeFunction: ($) =>
@@ -127,7 +136,10 @@ export default grammar({
           seq($.parameterDefinition, repeat(seq(",", $.parameterDefinition))),
         ),
         ")",
-        $.native,
+        choice(
+          seq(optional($.global), $.native),
+          seq($.native, optional($.global)),
+        ),
         optional(seq("\n", $.docString)),
       ),
     event: ($) =>
@@ -140,7 +152,8 @@ export default grammar({
         ),
         ")",
         "\n",
-        repeat1($._statement),
+        optional(seq($.docString, "\n")),
+        repeat($._statement),
         new RustRegex("(?i)endevent"),
       ),
     nativeEvent: ($) =>
@@ -153,6 +166,7 @@ export default grammar({
         ),
         ")",
         $.native,
+        optional(seq("\n", $.docString)),
       ),
     state: ($) =>
       seq(
@@ -162,6 +176,25 @@ export default grammar({
         "\n",
         repeat1(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
         new RustRegex("(?i)endstate"),
+      ),
+
+    property: ($) =>
+      seq(
+        $.type,
+        new RustRegex("(?i)property"),
+        $.identifier,
+        optional(seq("=", $._term)),
+        repeat(choice($.auto, $.autoreadonly, $.conditional, $.hidden)),
+      ),
+    propertyFull: ($) =>
+      seq(
+        $.type,
+        new RustRegex("(?i)property"),
+        $.identifier,
+        optional($.hidden),
+        "\n",
+        repeat1($.function),
+        new RustRegex("(?i)endproperty"),
       ),
     //-----------------------------------------------------------------
 
@@ -214,7 +247,25 @@ export default grammar({
         ),
       ),
     dotExpression: ($) =>
-      prec(10, seq($._expression, ".", choice($.callExpression, $.identifier))),
+      prec(
+        10,
+        seq(
+          choice(
+            $.identifier,
+            $.arrayExpression,
+            $.callExpression,
+            $.parenthesis,
+          ),
+          token.immediate("."),
+          choice(
+            $.identifier,
+            $.arrayExpression,
+            $.callExpression,
+            $.dotExpression,
+            $.parenthesis,
+          ),
+        ),
+      ),
     castExpression: ($) => prec(9, seq($._expression, "as", $.type)),
     unaryExpression: ($) => prec(8, seq(choice("!", "-"), $._expression)),
     binaryExpression: ($) =>
@@ -245,7 +296,7 @@ export default grammar({
         new RustRegex("(?i)int"),
         token(seq(new RustRegex("(?i)string"), token.immediate("[]"))),
         new RustRegex("(?i)string"),
-        seq($.identifier, "[]"),
+        seq($.identifier, token.immediate("[]")),
         $.identifier,
       ),
     bool: () => choice(new RustRegex("(?i)true"), new RustRegex("(?i)false")),

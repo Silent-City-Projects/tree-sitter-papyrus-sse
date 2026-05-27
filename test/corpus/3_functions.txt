@@ -25,9 +25,9 @@ Call("test")
                 (int))))
     (functionCall
         (callExpression
-            (identifier)
-            (parameter
-                (string)))))
+          (identifier)
+          (parameter
+            (string)))))
 
 
 

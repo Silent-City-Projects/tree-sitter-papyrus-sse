@@ -44,3 +44,32 @@ Event MyEvent(bool param1, int param2) native
             (type)
             (identifier))
         (native)))
+
+
+
+===============
+Event Docstring
+===============
+scriptname docevent
+
+Event MyEvent() native
+{teststr}
+
+Event MyEvent()
+{teststr}
+    return 0
+endevent
+
+---
+(source_file
+    (header
+        (identifier))
+    (nativeEvent
+        (identifier)
+        (native)
+        (docString))
+    (event
+        (identifier)
+        (docString)
+        (return
+            (int))))

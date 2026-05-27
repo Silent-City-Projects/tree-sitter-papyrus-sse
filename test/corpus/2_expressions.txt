@@ -3,7 +3,7 @@ Dot Expression
 ==============
 scriptname dot
 
-int x = y.test()
+y.test()
 
 int x = y.test(None, "param1", param2 = x)
 
@@ -15,13 +15,11 @@ int x = y.test(param0 = 5)
 (source_file
     (header
         (identifier))
-    (variableDefinition
-        (type)
-        (identifier)
+    (functionCall
         (dotExpression
-            (identifier)
-            (callExpression
-                (identifier))))
+          (identifier)
+          (callExpression
+            (identifier))))
     (variableDefinition
         (type)
         (identifier)
