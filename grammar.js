@@ -8,7 +8,7 @@
 // @ts-check
 
 export default grammar({
-  name: "papyrusSSE",
+  name: "papyrus_sse",
   extras: ($) => ["\\\n", /\s/, $._comment],
   word: ($) => $.identifier,
   conflicts: ($) => [

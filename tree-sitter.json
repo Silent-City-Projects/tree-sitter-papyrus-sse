@@ -3,7 +3,7 @@
   "grammars": [
     {
       "name": "papyrus_sse",
-      "camelcase": "PapyrusSSE",
+      "camelcase": "papyrusSSE",
       "title": "Papyrus SSE",
       "scope": "source.psc",
       "file-types": ["psc"],
