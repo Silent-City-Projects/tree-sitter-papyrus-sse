@@ -31,7 +31,7 @@ Int Property myInt = 5 AutoReadOnly Conditional Hidden
         (type)
         (identifier)
         (int)
-        (autoreadonly)
+        (autoReadOnly)
         (conditional)
         (hidden)))
 
