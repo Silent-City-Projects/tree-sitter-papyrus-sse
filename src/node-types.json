@@ -66,6 +66,14 @@
         "named": true
       },
       {
+        "type": "parent",
+        "named": true
+      },
+      {
+        "type": "self",
+        "named": true
+      },
+      {
         "type": "string",
         "named": true
       }
@@ -112,7 +120,38 @@
   {
     "type": "assignment",
     "named": true,
-    "fields": {},
+    "fields": {
+      "assignmentOperator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "%=",
+            "named": false
+          },
+          {
+            "type": "*=",
+            "named": false
+          },
+          {
+            "type": "+=",
+            "named": false
+          },
+          {
+            "type": "-=",
+            "named": false
+          },
+          {
+            "type": "/=",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -916,7 +955,22 @@
   {
     "type": "unaryExpression",
     "named": true,
-    "fields": {},
+    "fields": {
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,
@@ -1177,6 +1231,14 @@
   },
   {
     "type": "none",
+    "named": true
+  },
+  {
+    "type": "parent",
+    "named": true
+  },
+  {
+    "type": "self",
     "named": true
   },
   {

@@ -90,12 +90,12 @@ export default grammar({
     functionCall: ($) => choice($.callExpression, $.dotExpression),
     assignment: ($) =>
       choice(
-        seq($.lValue, "=", $.expression),
-        seq($.lValue, "+=", $.expression),
-        seq($.lValue, "-=", $.expression),
-        seq($.lValue, "*=", $.expression),
-        seq($.lValue, "/=", $.expression),
-        seq($.lValue, "%=", $.expression),
+        seq($.lValue, field("assignmentOperator", "="), $.expression),
+        seq($.lValue, field("assignmentOperator", "+="), $.expression),
+        seq($.lValue, field("assignmentOperator", "-="), $.expression),
+        seq($.lValue, field("assignmentOperator", "*="), $.expression),
+        seq($.lValue, field("assignmentOperator", "/="), $.expression),
+        seq($.lValue, field("assignmentOperator", "%="), $.expression),
       ),
     lValue: ($) =>
       choice(
@@ -212,7 +212,17 @@ export default grammar({
         $.binaryExpression,
       ),
     parameter: ($) => seq(optional(seq($.identifier, "=")), $.expression),
-    term: ($) => choice($.bool, $.int, $.float, $.none, $.string, $.identifier),
+    term: ($) =>
+      choice(
+        $.bool,
+        $.int,
+        $.float,
+        $.none,
+        $.self,
+        $.parent,
+        $.string,
+        $.identifier,
+      ),
     callExpression: ($) =>
       prec(
         14,
@@ -266,7 +276,8 @@ export default grammar({
         ),
       ),
     castExpression: ($) => prec(9, seq($.expression, "as", $.type)),
-    unaryExpression: ($) => prec(8, seq(choice("!", "-"), $.expression)),
+    unaryExpression: ($) =>
+      prec(8, seq(field("operator", choice("!", "-")), $.expression)),
     binaryExpression: ($) =>
       choice(
         prec.left(7, seq($.expression, field("operator", "*"), $.expression)),
@@ -307,6 +318,8 @@ export default grammar({
     float: () => new RustRegex("-?[0-9]+\.[0-9]+"),
     string: () => new RustRegex('\"([^\n\t"]*?)\"'),
     none: () => new RustRegex("(?i)none"),
+    self: () => new RustRegex("(?i)self"),
+    parent: () => new RustRegex("(?i)parent"),
     identifier: () => new RustRegex("(?i)[a-z_][a-z0-9_]*"),
     //-----------------------------------------------------------------
 

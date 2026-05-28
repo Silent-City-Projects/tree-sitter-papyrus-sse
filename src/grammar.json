@@ -400,8 +400,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "="
+              }
             },
             {
               "type": "SYMBOL",
@@ -417,8 +421,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "+="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "+="
+              }
             },
             {
               "type": "SYMBOL",
@@ -434,8 +442,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "-="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "-="
+              }
             },
             {
               "type": "SYMBOL",
@@ -451,8 +463,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "*="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "*="
+              }
             },
             {
               "type": "SYMBOL",
@@ -468,8 +484,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "/="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "/="
+              }
             },
             {
               "type": "SYMBOL",
@@ -485,8 +505,12 @@
               "name": "lValue"
             },
             {
-              "type": "STRING",
-              "value": "%="
+              "type": "FIELD",
+              "name": "assignmentOperator",
+              "content": {
+                "type": "STRING",
+                "value": "%="
+              }
             },
             {
               "type": "SYMBOL",
@@ -1288,6 +1312,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "self"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parent"
+        },
+        {
+          "type": "SYMBOL",
           "name": "string"
         },
         {
@@ -1536,17 +1568,21 @@
         "type": "SEQ",
         "members": [
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "!"
-              },
-              {
-                "type": "STRING",
-                "value": "-"
-              }
-            ]
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "!"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                }
+              ]
+            }
           },
           {
             "type": "SYMBOL",
@@ -1939,6 +1975,14 @@
     "none": {
       "type": "PATTERN",
       "value": "(?i)none"
+    },
+    "self": {
+      "type": "PATTERN",
+      "value": "(?i)self"
+    },
+    "parent": {
+      "type": "PATTERN",
+      "value": "(?i)parent"
     },
     "identifier": {
       "type": "PATTERN",
