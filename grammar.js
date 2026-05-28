@@ -170,11 +170,11 @@ export default grammar({
       ),
     state: ($) =>
       seq(
-        optional(new RustRegex("(?i)auto")),
+        optional(field("autoState", new RustRegex("(?i)auto"))),
         new RustRegex("(?i)state"),
         $.identifier,
         "\n",
-        repeat1(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
+        repeat(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
         new RustRegex("(?i)endstate"),
       ),
 

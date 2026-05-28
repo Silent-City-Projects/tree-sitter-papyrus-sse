@@ -1064,8 +1064,12 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "PATTERN",
-              "value": "(?i)auto"
+              "type": "FIELD",
+              "name": "autoState",
+              "content": {
+                "type": "PATTERN",
+                "value": "(?i)auto"
+              }
             },
             {
               "type": "BLANK"
@@ -1085,7 +1089,7 @@
           "value": "\n"
         },
         {
-          "type": "REPEAT1",
+          "type": "REPEAT",
           "content": {
             "type": "CHOICE",
             "members": [
