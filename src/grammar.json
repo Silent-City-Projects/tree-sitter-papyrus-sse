@@ -210,8 +210,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "(?i)if"
+          "type": "FIELD",
+          "name": "ifBegin",
+          "content": {
+            "type": "PATTERN",
+            "value": "(?i)if"
+          }
         },
         {
           "type": "SYMBOL",
@@ -234,8 +238,12 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "(?i)elseif"
+                "type": "FIELD",
+                "name": "ifElse",
+                "content": {
+                  "type": "PATTERN",
+                  "value": "(?i)elseif"
+                }
               },
               {
                 "type": "SYMBOL",
@@ -262,8 +270,12 @@
               "type": "SEQ",
               "members": [
                 {
-                  "type": "PATTERN",
-                  "value": "(?i)else"
+                  "type": "FIELD",
+                  "name": "else",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "(?i)else"
+                  }
                 },
                 {
                   "type": "STRING",
@@ -284,8 +296,12 @@
           ]
         },
         {
-          "type": "PATTERN",
-          "value": "(?i)endif"
+          "type": "FIELD",
+          "name": "ifEnd",
+          "content": {
+            "type": "PATTERN",
+            "value": "(?i)endif"
+          }
         }
       ]
     },

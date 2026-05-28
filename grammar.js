@@ -56,20 +56,26 @@ export default grammar({
       ),
     if: ($) =>
       seq(
-        new RustRegex("(?i)if"),
+        field("ifBegin", new RustRegex("(?i)if")),
         $.expression,
         "\n",
         repeat($._statement),
         repeat(
           seq(
-            new RustRegex("(?i)elseif"),
+            field("ifElse", new RustRegex("(?i)elseif")),
             $.expression,
             "\n",
             repeat($._statement),
           ),
         ),
-        optional(seq(new RustRegex("(?i)else"), "\n", repeat($._statement))),
-        new RustRegex("(?i)endif"),
+        optional(
+          seq(
+            field("else", new RustRegex("(?i)else")),
+            "\n",
+            repeat($._statement),
+          ),
+        ),
+        field("ifEnd", new RustRegex("(?i)endif")),
       ),
     while: ($) =>
       seq(
@@ -177,7 +183,6 @@ export default grammar({
         repeat(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
         new RustRegex("(?i)endstate"),
       ),
-
     property: ($) =>
       seq(
         $.type,
