@@ -11,6 +11,7 @@ Int Property myInt Auto
         (identifier))
     (property
         (type)
+        (startProperty)
         (identifier)
         (auto)))
 
@@ -29,6 +30,7 @@ Int Property myInt = 5 AutoReadOnly Conditional Hidden
         (identifier))
     (property
         (type)
+        (startProperty)
         (identifier)
         (int)
         (autoReadOnly)
@@ -43,12 +45,15 @@ Property Full
 scriptname prop
 
 Int Property myInt Hidden
+
     function get()
         return 5
     endfunction
+
     function set()
         return 5
     endfunction
+
 EndProperty
 
 ---
@@ -57,13 +62,19 @@ EndProperty
         (identifier))
     (propertyFull
         (type)
+        (startProperty)
         (identifier)
         (hidden)
         (function
+            (startFunction)
             (identifier)
             (return
-                (int)))
+                (int))
+            (endFunction))
         (function
+            (startFunction)
             (identifier)
             (return
-                (int)))))
+                (int))
+            (endFunction))
+        (endProperty)))

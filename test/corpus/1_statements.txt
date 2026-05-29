@@ -215,7 +215,7 @@ If Statement
 ============
 scriptname ifScript
 
-if x == y
+If x == y
     y = z
 elseif 5 > 6
     m = u
@@ -228,6 +228,7 @@ endif
     (header
         (identifier))
     (if
+        (startIf)
         (binaryExpression
             (identifier)
             (identifier))
@@ -235,15 +236,18 @@ endif
             (lValue
                 (identifier))
             (identifier))
+        (elseIf)
         (binaryExpression
             (int)
             (int))
         (assignment
             (lValue
                 (identifier))
-            (identifier))
+                (identifier))
+        (else)
         (return
-            (int))))
+            (int))
+        (endIf)))
 
 
 
@@ -262,11 +266,13 @@ endwhile
     (header
         (identifier))
     (while
+        (startWhile)
         (bool)
         (assignment
             (lValue
                 (identifier))
-            (int))))
+            (int))
+        (endWhile)))
 
 
 
@@ -286,11 +292,16 @@ endstate
     (header
         (identifier))
     (state
+        (auto)
+        (startState)
         (identifier)
         (function
+            (startFunction)
             (identifier)
             (return
-                (int)))))
+                (int))
+            (endFunction))
+        (endState)))
 
 
 

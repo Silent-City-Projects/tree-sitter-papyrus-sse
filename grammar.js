@@ -9,16 +9,16 @@
 
 export default grammar({
   name: "papyrus_sse",
-  extras: ($) => ["\\\n", /\s/, $.comment],
+  extras: ($) => ["\\\n", "\\\r\n", /[ \t]/, $.comment],
   word: ($) => $.identifier,
   conflicts: ($) => [
     [$.nativeFunction],
     [$.nativeEvent],
     [$.property, $.propertyFull],
   ],
-  supertypes: ($) => [$.expression, $.term],
+  supertypes: ($) => [$.expression, $.term, $.statement],
   rules: {
-    source_file: ($) => seq($.header, repeat($._statement)),
+    source_file: ($) => seq($.header, repeat(seq(optional($.statement), "\n"))),
 
     header: ($) =>
       seq(
@@ -33,8 +33,32 @@ export default grammar({
     comment: () =>
       token(choice(seq(";", /.*/), seq(";*", /[^*]*\*+([^/*][^*]*\*+)*/, ";"))),
 
+    //Keywords---------------------------------------------------------
+    startIf: () => new RustRegex("(?i)if"),
+    elseIf: () => new RustRegex("(?i)elseif"),
+    else: () => new RustRegex("(?i)else"),
+    endIf: () => new RustRegex("(?i)endif"),
+    startWhile: () => new RustRegex("(?i)while"),
+    endWhile: () => new RustRegex("(?i)endwhile"),
+    startState: () => new RustRegex("(?i)state"),
+    endState: () => new RustRegex("(?i)endstate"),
+    startFunction: () => new RustRegex("(?i)function"),
+    endFunction: () => new RustRegex("(?i)endfunction"),
+    startEvent: () => new RustRegex("(?i)event"),
+    endEvent: () => new RustRegex("(?i)endevent"),
+    startProperty: () => new RustRegex("(?i)property"),
+    endProperty: () => new RustRegex("(?i)endproperty"),
+
+    conditional: () => new RustRegex("(?i)conditional"),
+    hidden: () => new RustRegex("(?i)hidden"),
+    auto: () => new RustRegex("(?i)auto"),
+    autoReadOnly: () => new RustRegex("(?i)autoreadonly"),
+    native: () => new RustRegex("(?i)native"),
+    global: () => new RustRegex("(?i)global"),
+    //-----------------------------------------------------------------
+
     //Statements-------------------------------------------------------
-    _statement: ($) =>
+    statement: ($) =>
       seq(
         choice(
           $.if,
@@ -52,38 +76,31 @@ export default grammar({
           $.property,
           $.propertyFull,
         ),
-        "\n",
       ),
     if: ($) =>
       seq(
-        field("ifBegin", new RustRegex("(?i)if")),
+        $.startIf,
         $.expression,
         "\n",
-        repeat($._statement),
+        repeat(seq(optional($.statement), "\n")),
         repeat(
           seq(
-            field("ifElse", new RustRegex("(?i)elseif")),
+            $.elseIf,
             $.expression,
             "\n",
-            repeat($._statement),
+            repeat(seq(optional($.statement), "\n")),
           ),
         ),
-        optional(
-          seq(
-            field("else", new RustRegex("(?i)else")),
-            "\n",
-            repeat($._statement),
-          ),
-        ),
-        field("ifEnd", new RustRegex("(?i)endif")),
+        optional(seq($.else, "\n", repeat(seq(optional($.statement), "\n")))),
+        $.endIf,
       ),
     while: ($) =>
       seq(
-        new RustRegex("(?i)while"),
+        $.startWhile,
         $.expression,
         "\n",
-        repeat1($._statement),
-        new RustRegex("(?i)endwhile"),
+        repeat(seq(optional($.statement), "\n")),
+        $.endWhile,
       ),
     import: ($) => seq(new RustRegex("(?i)import"), $.identifier),
     variableDefinition: ($) =>
@@ -119,7 +136,7 @@ export default grammar({
     function: ($) =>
       seq(
         optional($.type),
-        new RustRegex("(?i)function"),
+        $.startFunction,
         $.identifier,
         "(",
         optional(
@@ -129,13 +146,13 @@ export default grammar({
         optional($.global),
         "\n",
         optional(seq($.docString, "\n")),
-        repeat($._statement),
-        new RustRegex("(?i)endfunction"),
+        repeat(seq(optional($.statement), "\n")),
+        $.endFunction,
       ),
     nativeFunction: ($) =>
       seq(
         optional($.type),
-        new RustRegex("(?i)function"),
+        $.startFunction,
         $.identifier,
         "(",
         optional(
@@ -150,7 +167,7 @@ export default grammar({
       ),
     event: ($) =>
       seq(
-        new RustRegex("(?i)event"),
+        $.startEvent,
         $.identifier,
         "(",
         optional(
@@ -159,12 +176,12 @@ export default grammar({
         ")",
         "\n",
         optional(seq($.docString, "\n")),
-        repeat($._statement),
-        new RustRegex("(?i)endevent"),
+        repeat(seq(optional($.statement), "\n")),
+        $.endEvent,
       ),
     nativeEvent: ($) =>
       seq(
-        new RustRegex("(?i)event"),
+        $.startEvent,
         $.identifier,
         "(",
         optional(
@@ -176,17 +193,20 @@ export default grammar({
       ),
     state: ($) =>
       seq(
-        optional(field("autoState", new RustRegex("(?i)auto"))),
-        new RustRegex("(?i)state"),
+        optional($.auto),
+        $.startState,
         $.identifier,
         "\n",
-        repeat(choice($.function, $.nativeFunction, $.event, $.nativeEvent)),
-        new RustRegex("(?i)endstate"),
+        repeat(
+          choice($.function, $.nativeFunction, $.event, $.nativeEvent, "\n"),
+        ),
+        "\n",
+        $.endState,
       ),
     property: ($) =>
       seq(
         $.type,
-        new RustRegex("(?i)property"),
+        $.startProperty,
         $.identifier,
         optional(seq("=", $.term)),
         repeat(choice($.auto, $.autoReadOnly, $.conditional, $.hidden)),
@@ -194,12 +214,12 @@ export default grammar({
     propertyFull: ($) =>
       seq(
         $.type,
-        new RustRegex("(?i)property"),
+        $.startProperty,
         $.identifier,
         optional($.hidden),
         "\n",
-        repeat1($.function),
-        new RustRegex("(?i)endproperty"),
+        repeat1(seq(optional($.function), "\n")),
+        $.endProperty,
       ),
     //-----------------------------------------------------------------
 
@@ -326,15 +346,6 @@ export default grammar({
     self: () => new RustRegex("(?i)self"),
     parent: () => new RustRegex("(?i)parent"),
     identifier: () => new RustRegex("(?i)[a-z_][a-z0-9_]*"),
-    //-----------------------------------------------------------------
-
-    //Flags------------------------------------------------------------
-    conditional: () => new RustRegex("(?i)conditional"),
-    hidden: () => new RustRegex("(?i)hidden"),
-    auto: () => new RustRegex("(?i)auto"),
-    autoReadOnly: () => new RustRegex("(?i)autoreadonly"),
-    native: () => new RustRegex("(?i)native"),
-    global: () => new RustRegex("(?i)global"),
     //-----------------------------------------------------------------
   },
 });

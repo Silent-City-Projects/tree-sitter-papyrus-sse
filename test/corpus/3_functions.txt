@@ -49,14 +49,17 @@ EndFunction
     (header
         (identifier))
     (function
+        (startFunction)
         (identifier)
         (parameterDefinition
             (type
             (identifier))
         (identifier))
         (return
-          (int)))
+            (int))
+        (endFunction))
     (function
+        (startFunction)
         (identifier)
         (parameterDefinition
             (type
@@ -65,7 +68,8 @@ EndFunction
         (bool))
         (global)
         (return
-          (int))))
+            (int))
+        (endFunction)))
 
 
 
@@ -84,10 +88,12 @@ int function aa(test aaaa, bool meow = true) native
         (identifier))
       (nativeFunction
         (type)
+        (startFunction)
         (identifier)
         (native))
       (nativeFunction
         (type)
+        (startFunction)
         (identifier)
         (parameterDefinition
           (type
@@ -129,11 +135,14 @@ function test2(test aaaa) native
     (header
         (identifier))
     (function
+        (startFunction)
         (identifier)
         (docString)
         (return
-          (int)))
+          (int))
+        (endFunction))
     (nativeFunction
+        (startFunction)
         (identifier)
         (parameterDefinition
           (type

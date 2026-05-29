@@ -42,6 +42,68 @@
     ]
   },
   {
+    "type": "statement",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "assignment",
+        "named": true
+      },
+      {
+        "type": "event",
+        "named": true
+      },
+      {
+        "type": "function",
+        "named": true
+      },
+      {
+        "type": "functionCall",
+        "named": true
+      },
+      {
+        "type": "if",
+        "named": true
+      },
+      {
+        "type": "import",
+        "named": true
+      },
+      {
+        "type": "nativeEvent",
+        "named": true
+      },
+      {
+        "type": "nativeFunction",
+        "named": true
+      },
+      {
+        "type": "property",
+        "named": true
+      },
+      {
+        "type": "propertyFull",
+        "named": true
+      },
+      {
+        "type": "return",
+        "named": true
+      },
+      {
+        "type": "state",
+        "named": true
+      },
+      {
+        "type": "variableDefinition",
+        "named": true
+      },
+      {
+        "type": "while",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "term",
     "named": true,
     "subtypes": [
@@ -166,11 +228,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "auto",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "binaryExpression",
@@ -329,23 +386,11 @@
       "required": true,
       "types": [
         {
-          "type": "assignment",
-          "named": true
-        },
-        {
           "type": "docString",
           "named": true
         },
         {
-          "type": "event",
-          "named": true
-        },
-        {
-          "type": "function",
-          "named": true
-        },
-        {
-          "type": "functionCall",
+          "type": "endEvent",
           "named": true
         },
         {
@@ -353,47 +398,15 @@
           "named": true
         },
         {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "nativeEvent",
-          "named": true
-        },
-        {
-          "type": "nativeFunction",
-          "named": true
-        },
-        {
           "type": "parameterDefinition",
           "named": true
         },
         {
-          "type": "property",
+          "type": "startEvent",
           "named": true
         },
         {
-          "type": "propertyFull",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "state",
-          "named": true
-        },
-        {
-          "type": "variableDefinition",
-          "named": true
-        },
-        {
-          "type": "while",
+          "type": "statement",
           "named": true
         }
       ]
@@ -408,23 +421,11 @@
       "required": true,
       "types": [
         {
-          "type": "assignment",
-          "named": true
-        },
-        {
           "type": "docString",
           "named": true
         },
         {
-          "type": "event",
-          "named": true
-        },
-        {
-          "type": "function",
-          "named": true
-        },
-        {
-          "type": "functionCall",
+          "type": "endFunction",
           "named": true
         },
         {
@@ -436,51 +437,19 @@
           "named": true
         },
         {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "nativeEvent",
-          "named": true
-        },
-        {
-          "type": "nativeFunction",
-          "named": true
-        },
-        {
           "type": "parameterDefinition",
           "named": true
         },
         {
-          "type": "property",
+          "type": "startFunction",
           "named": true
         },
         {
-          "type": "propertyFull",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "state",
+          "type": "statement",
           "named": true
         },
         {
           "type": "type",
-          "named": true
-        },
-        {
-          "type": "variableDefinition",
-          "named": true
-        },
-        {
-          "type": "while",
           "named": true
         }
       ]
@@ -541,11 +510,15 @@
       "required": true,
       "types": [
         {
-          "type": "assignment",
+          "type": "else",
           "named": true
         },
         {
-          "type": "event",
+          "type": "elseIf",
+          "named": true
+        },
+        {
+          "type": "endIf",
           "named": true
         },
         {
@@ -553,51 +526,11 @@
           "named": true
         },
         {
-          "type": "function",
+          "type": "startIf",
           "named": true
         },
         {
-          "type": "functionCall",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "nativeEvent",
-          "named": true
-        },
-        {
-          "type": "nativeFunction",
-          "named": true
-        },
-        {
-          "type": "property",
-          "named": true
-        },
-        {
-          "type": "propertyFull",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "state",
-          "named": true
-        },
-        {
-          "type": "variableDefinition",
-          "named": true
-        },
-        {
-          "type": "while",
+          "type": "statement",
           "named": true
         }
       ]
@@ -665,6 +598,10 @@
         {
           "type": "parameterDefinition",
           "named": true
+        },
+        {
+          "type": "startEvent",
+          "named": true
         }
       ]
     }
@@ -695,6 +632,10 @@
         },
         {
           "type": "parameterDefinition",
+          "named": true
+        },
+        {
+          "type": "startFunction",
           "named": true
         },
         {
@@ -782,6 +723,10 @@
           "named": true
         },
         {
+          "type": "startProperty",
+          "named": true
+        },
+        {
           "type": "term",
           "named": true
         },
@@ -801,6 +746,10 @@
       "required": true,
       "types": [
         {
+          "type": "endProperty",
+          "named": true
+        },
+        {
           "type": "function",
           "named": true
         },
@@ -810,6 +759,10 @@
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "startProperty",
           "named": true
         },
         {
@@ -844,63 +797,11 @@
       "required": true,
       "types": [
         {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "event",
-          "named": true
-        },
-        {
-          "type": "function",
-          "named": true
-        },
-        {
-          "type": "functionCall",
-          "named": true
-        },
-        {
           "type": "header",
           "named": true
         },
         {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "nativeEvent",
-          "named": true
-        },
-        {
-          "type": "nativeFunction",
-          "named": true
-        },
-        {
-          "type": "property",
-          "named": true
-        },
-        {
-          "type": "propertyFull",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "state",
-          "named": true
-        },
-        {
-          "type": "variableDefinition",
-          "named": true
-        },
-        {
-          "type": "while",
+          "type": "statement",
           "named": true
         }
       ]
@@ -914,6 +815,14 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "auto",
+          "named": true
+        },
+        {
+          "type": "endState",
+          "named": true
+        },
         {
           "type": "event",
           "named": true
@@ -932,6 +841,10 @@
         },
         {
           "type": "nativeFunction",
+          "named": true
+        },
+        {
+          "type": "startState",
           "named": true
         }
       ]
@@ -1018,11 +931,7 @@
       "required": true,
       "types": [
         {
-          "type": "assignment",
-          "named": true
-        },
-        {
-          "type": "event",
+          "type": "endWhile",
           "named": true
         },
         {
@@ -1030,51 +939,11 @@
           "named": true
         },
         {
-          "type": "function",
+          "type": "startWhile",
           "named": true
         },
         {
-          "type": "functionCall",
-          "named": true
-        },
-        {
-          "type": "if",
-          "named": true
-        },
-        {
-          "type": "import",
-          "named": true
-        },
-        {
-          "type": "nativeEvent",
-          "named": true
-        },
-        {
-          "type": "nativeFunction",
-          "named": true
-        },
-        {
-          "type": "property",
-          "named": true
-        },
-        {
-          "type": "propertyFull",
-          "named": true
-        },
-        {
-          "type": "return",
-          "named": true
-        },
-        {
-          "type": "state",
-          "named": true
-        },
-        {
-          "type": "variableDefinition",
-          "named": true
-        },
-        {
-          "type": "while",
+          "type": "statement",
           "named": true
         }
       ]
@@ -1193,6 +1062,10 @@
     "named": false
   },
   {
+    "type": "auto",
+    "named": true
+  },
+  {
     "type": "autoReadOnly",
     "named": true
   },
@@ -1207,6 +1080,38 @@
   },
   {
     "type": "docString",
+    "named": true
+  },
+  {
+    "type": "else",
+    "named": true
+  },
+  {
+    "type": "elseIf",
+    "named": true
+  },
+  {
+    "type": "endEvent",
+    "named": true
+  },
+  {
+    "type": "endFunction",
+    "named": true
+  },
+  {
+    "type": "endIf",
+    "named": true
+  },
+  {
+    "type": "endProperty",
+    "named": true
+  },
+  {
+    "type": "endState",
+    "named": true
+  },
+  {
+    "type": "endWhile",
     "named": true
   },
   {
@@ -1239,6 +1144,30 @@
   },
   {
     "type": "self",
+    "named": true
+  },
+  {
+    "type": "startEvent",
+    "named": true
+  },
+  {
+    "type": "startFunction",
+    "named": true
+  },
+  {
+    "type": "startIf",
+    "named": true
+  },
+  {
+    "type": "startProperty",
+    "named": true
+  },
+  {
+    "type": "startState",
+    "named": true
+  },
+  {
+    "type": "startWhile",
     "named": true
   },
   {

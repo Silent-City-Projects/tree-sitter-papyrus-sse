@@ -12,6 +12,7 @@ EndEvent
     (header
         (identifier))
     (event
+        (startEvent)
         (identifier)
         (parameterDefinition
             (type)
@@ -20,7 +21,8 @@ EndEvent
             (type)
             (identifier))
         (return
-            (identifier))))
+            (identifier))
+        (endEvent)))
 
 
 
@@ -36,6 +38,7 @@ Event MyEvent(bool param1, int param2) native
     (header
         (identifier))
     (nativeEvent
+        (startEvent)
         (identifier)
         (parameterDefinition
             (type)
@@ -65,11 +68,14 @@ endevent
     (header
         (identifier))
     (nativeEvent
+        (startEvent)
         (identifier)
         (native)
         (docString))
     (event
+        (startEvent)
         (identifier)
         (docString)
         (return
-            (int))))
+            (int))
+        (endEvent)))
